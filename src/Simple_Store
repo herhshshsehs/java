@@ -1,0 +1,106 @@
+import java.util.Scanner;
+
+public class Simple_Store {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+        int subtotal = 0;
+        int itemsCount = 0;
+        boolean shopping = true;
+
+        while (shopping){
+            System.out.println();
+            System.out.println("===== SIMPLE STORE =====");
+            System.out.println("1. Mouse - $20");
+            System.out.println("2. Keyboard - $40");
+            System.out.println("3. Headphones - $50");
+            System.out.println("4. Laptop Stand - $30");
+            System.out.println("5. Checkout");
+            System.out.print("Choose a product: ");
+            int choice = scanner.nextInt();
+
+            if (choice == 5) {
+                shopping = false;
+            } else if (choice >= 1 && choice <= 4) {
+                String name = "";
+                int prise = 0;
+
+                if (choice ==1){
+                    name = "mouse";
+                    prise = 20;
+                } else if (choice == 2) {
+                    name = "Keyboard";
+                    prise = 40;
+                } else if (choice == 3) {
+                    name = "Headphones";
+                    prise = 50;
+                } else {
+                    name = "Laptop Stand";
+                    prise = 30;
+                }
+
+                System.out.println("You selected: " + name);
+                System.out.println("Prise: "+ prise);
+                System.out.println("Enter quantity: ");
+                int quantity = scanner.nextInt();
+
+                if (quantity > 0){
+                    int cost = prise * quantity;
+                    subtotal = subtotal + cost;
+                    itemsCount = itemsCount + quantity;
+
+                    System.out.println(+ quantity + prise +" = " + cost);
+                    System.out.println("Added to cart");
+                    System.out.println("Curred total: " + subtotal);
+                } else {
+                    System.out.println("Invalid quantity");
+                    System.out.println("Quantity must be greater then o.");
+                }
+            } else {
+                System.out.println("Invalid option.");
+                System.out.println("Please choose a number from 1 to 5.");
+            }
+        }
+        System.out.println();
+        System.out.println("===== CHECKOUT =====");
+        System.out.println("Items purchased: " + itemsCount);
+        System.out.println("Subtotal: $" + subtotal);
+
+        int discount = 0;
+        if(subtotal >= 100){
+            System.out.println("You received a 10% discount");
+            discount = subtotal / 10;
+        }
+        int finalTotal = subtotal - discount;
+        System.out.println("Discount: " + discount);
+        System.out.println("Final total: " + finalTotal);
+
+        System.out.println("Enter payment amout: ");
+        int payment = scanner.nextInt();
+        while (payment < finalTotal){
+            int needed = finalTotal - payment;
+            System.out.println("Insufficient payment.");
+            System.out.println("You still need to pay: $" + needed);
+            System.out.print("Enter payment amount: $");
+            payment = scanner.nextInt();
+        }
+        System.out.println("Payment successful!");
+        int change = payment - finalTotal;
+
+        System.out.println();
+        System.out.println("========================");
+        System.out.println(" SIMPLE STORE");
+        System.out.println("========================");
+        System.out.println("Items purchased: " + itemsCount);
+        System.out.println("Subtotal: $" + subtotal);
+        System.out.println("Discount: $" + discount);
+        System.out.println("Final total: $" + finalTotal);
+        System.out.println("Payment: $" + payment);
+        System.out.println("Change: $" + change);
+        System.out.println("========================");
+        System.out.println("Thank you for shopping!");
+        System.out.println("========================");
+
+        scanner.close();
+    }
+}
